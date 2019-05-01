@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # Graceful shutdown, used by trapping SIGTERM
 function graceful_shutdown {

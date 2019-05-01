@@ -31,8 +31,11 @@ ADD run.sh /run.sh
 RUN chmod 755 /run.sh && \
   usermod --shell /bin/bash unifi-protect
 
+# Ports
+EXPOSE 7080/tcp 7443/tcp 7444/tcp 7447/tcp 7550/tcp 7442/tcp
+
 # Video storage volume
-VOLUME ["/var/lib/unifi-video/videos"]
+VOLUME ["/srv/unifi-protect"]
 
 # Run this potato
 CMD ["/run.sh"]
