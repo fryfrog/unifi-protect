@@ -1,3 +1,7 @@
+# THIS DOES NOT WORK YET
+
+See [issue 1](https://github.com/fryfrog/unifi-protect/issues/1) for progress or to provide assistance.
+
 # unifi-protect
 An Ubuntu based Docker image for Unifi Protect
 
