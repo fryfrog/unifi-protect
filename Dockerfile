@@ -34,7 +34,7 @@ RUN chmod 755 /run.sh && \
 EXPOSE 7080/tcp 7443/tcp 7444/tcp 7447/tcp 7550/tcp 7442/tcp
 
 # Video storage volume
-VOLUME ["/srv/unifi-protect"]
+VOLUME ["/srv/unifi-protect", "/var/lib/postgresql/10/main"]
 
 # Run this potato
 CMD ["/run.sh"]

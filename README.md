@@ -23,6 +23,8 @@ docker run \
         -e TZ=America/Los_Angeles \
         -e PUID=999 \
         -e PGID=999 \
+        -e PUID_POSTGRES=102 \
+        -e PGID_POSTGRES=104 \
         -e DEBUG=1 \
         fryfrog/unifi-protect
 ```
