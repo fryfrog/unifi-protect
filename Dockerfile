@@ -2,7 +2,7 @@ FROM phusion/baseimage:0.11
 MAINTAINER fryfrog@gmail.com
 
 # Version
-ENV version 1.9.2
+ENV version 1.10.0
 
 # Set correct environment variables
 ENV HOME /root
@@ -12,9 +12,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # Add mongodb repo, key, update and install needed packages
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 97B46B8582C6571E && \
-  apt-add-repository https://apt.ubnt.com && \
-  apt-get update && \
+RUN apt-get update && \
   apt-get install -y apt-utils && \
   apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
   apt-get install -y  \
@@ -22,9 +20,10 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 97B46B8582
     patch \
     sudo \
     tzdata \
-    unifi-protect \
     moreutils \
-    wget
+    wget && \
+  wget --quiet http://apt.ubnt.com/pool/beta/u/unifi-protect/unifi-protect.jessie~stretch~xenial~bionic_amd64.v1.10.0-beta.5.deb && \
+  apt install -y ./unifi-protect.jessie~stretch~xenial~bionic_amd64.v1.10.0-beta.5.deb
 
 # Add needed patches and scripts
 ADD run.sh /run.sh
