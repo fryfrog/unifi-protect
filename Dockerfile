@@ -1,8 +1,8 @@
 FROM phusion/baseimage:0.11
-MAINTAINER pducharme@me.com
+MAINTAINER fryfrog@gmail.com
 
 # Version
-ENV version 3.10.2
+ENV version 1.9.2
 
 # Set correct environment variables
 ENV HOME /root
