@@ -12,7 +12,7 @@ case "${VERSION}" in
     ;;
 esac
 
-tempfile="$(mktemp).deb" && curl -fsSL -o "${tempfile}" "${url}" && apt install -y "${tempfile}" && INSTALL_OK="yes"
+apt install -y postgresql && tempfile="$(mktemp).deb" && curl -fsSL -o "${tempfile}" "${url}" && apt install -y "${tempfile}" && INSTALL_OK="yes"
 if [[ "${INSTALL_OK}" != "yes" ]]; then
   echo -e '\e[31m'"Installation of \"${url}\" failed!"'\e[0m'
   exit 1
@@ -22,3 +22,7 @@ fi
 usermod -o -u "${PUID}" unifi-protect
 usermod --shell /bin/bash unifi-protect
 groupmod -o -g "${PGID}" unifi-protect
+
+# Set the UID/PID for postgres user
+usermod -o -u "${PUID_POSTGRES}" postgres
+groupmod -o -g "${PGID_POSTGRES}" postgres

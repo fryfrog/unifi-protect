@@ -13,7 +13,7 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS 2
 EXPOSE 7080/tcp 7443/tcp 7444/tcp 7447/tcp 7550/tcp 7442/tcp
 
 # Video storage volume
-VOLUME ["/srv/unifi-protect", "/var/lib/postgresql/10/main"]
+VOLUME ["/srv/unifi-protect"]
 
 # Setup the S6 overlay and update/install packages
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz /tmp/
@@ -31,7 +31,6 @@ RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
     tzdata \
     moreutils \
     nodejs \
-    postgresql \
     psmisc \
     sudo \
     systemd

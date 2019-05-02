@@ -16,7 +16,3 @@ VERSION         | ${VERSION}
 TZ              | ${TZ}
 ----------------------------------------------------------------------
 "
-
-# Set the UID/PID for postgres user
-usermod -o -u "${PUID_POSTGRES}" postgres
-groupmod -o -g "${PGID_POSTGRES}" postgres

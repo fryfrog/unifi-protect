@@ -21,6 +21,7 @@ docker run \
         -p 7550:7550 \
         -v <data dir>:/srv/unifi-protect \
         -v <db dir>:/var/lib/postgresql/10/main \
+        -v <db config dir>:/etc/postgresql/10/main \
         -e TZ=America/Los_Angeles \
         -e PUID=999 \
         -e PGID=999 \
