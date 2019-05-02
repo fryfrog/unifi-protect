@@ -1,0 +1,39 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# postgres
+echo -n "Setting ownership of /etc/postgresql/10 and /var/lib/postgresql/10... "
+if chown -R postgres:postgres /etc/postgresql/10 /var/lib/postgresql/10; then
+  echo "done."
+else
+  echo "failed."
+fi
+
+echo -n "Setting permissions of /etc/postgresql/10 and /var/lib/postgresql/10... "
+if chmod -R a=,u+rwX /etc/postgresql/10 /var/lib/postgresql/10; then
+  echo "done."
+else
+  echo "failed."
+fi
+
+echo -n "Setting permissions of /var/run/postgresql... "
+if chmod 777 /var/run/postgresql; then
+  echo "done."
+else
+  echo "failed."
+fi
+
+# unifi-protect
+echo -n "Setting ownership of /srv/unifi-protect... "
+if chown -R unifi-protect:unifi-protect /srv/unifi-protect; then
+  echo "done."
+else
+  echo "failed."
+fi
+
+echo -n "Setting ownership of /srv/unifi-protect... "
+if chmod -R a=,a+rX,u+w,g+w /srv/unifi-protect; then
+  echo "done."
+else
+  echo "failed."
+fi

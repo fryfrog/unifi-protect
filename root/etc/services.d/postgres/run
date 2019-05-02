@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+umask "${UMASK}"
+
+# Create the stat folder in /var/run/postgresql
+su -c "mkdir -p /var/run/postgresql/10-main.pg_stat_tmp" postgres
+
+# Run postgresql
+exec s6-setuidgid postgres /usr/lib/postgresql/10/bin/postgres --config_file="/etc/postgresql/10/main/postgresql.conf" -D /var/lib/postgresql/10/main -s

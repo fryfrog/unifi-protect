@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+umask "${UMASK}"
+
+# Wait for postgres to come up...
+s6-svwait -t 60000 -u /var/run/s6/services/postgres
+
+exec s6-setuidgid unifi-protect /usr/bin/node --expose_gc --optimize_for_size --memory_reducer --max_old_space_size=512 /usr/share/unifi-protect/app/daemon.js
