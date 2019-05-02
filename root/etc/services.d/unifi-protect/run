@@ -6,4 +6,21 @@ umask "${UMASK}"
 # Wait for postgres to come up...
 s6-svwait -t 60000 -u /var/run/s6/services/postgres
 
+# Environment variables
+export $(grep -v '^#' /etc/default/unifi-protect | xargs)
+
+UFP_BACKUPS_DIR=/etc/unifi-protect/backups
+UFP_DATADIR=/srv/unifi-protect
+UFP_TMPFS_DIR=/srv/unifi-protect/temp
+UFP_TMPFS_SIZE=256m
+MALLOC_ARENA_MAX=1
+MALLOC_MMAP_THRESHOLD_=8192
+MALLOC_TRIM_THRESHOLD_=1
+
+# Pre-start from systemd service file
+/usr/share/unifi-protect/app/hooks/pre-start
+
+# WorkingDir is set in systemd service file
+cd /usr/share/unifi-protect
+
 exec s6-setuidgid unifi-protect /usr/bin/node --expose_gc --optimize_for_size --memory_reducer --max_old_space_size=512 /usr/share/unifi-protect/app/daemon.js

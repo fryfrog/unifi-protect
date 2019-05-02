@@ -1,8 +1,5 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-# Stop posgres
-/usr/bin/pg_ctlcluster --skip-systemctl-redirect -m fast 10-main stop
-
 # Run unifi-protect post stop script
 /usr/share/unifi-protect/app/hooks/post-stop
