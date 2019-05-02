@@ -63,12 +63,15 @@ PGID_POSTGRES=$(echo "${PGID_POSTGRES}" | sed -e 's/^[ \t]*//')
 if [[ -n "${PGID_POSTGRES}" ]]; then
   echo "[info] PGID_POSTGRES defined as '${PGID_POSTGRES}'" | ts '%Y-%m-%d %H:%M:%.S'
 else
-  echo "[warn] PGID_POSTGRES not defined (via -e PGID_POSTGRES), defaulting to '100'" | ts '%Y-%m-%d %H:%M:%.S'
+  echo "[warn] PGID_POSTGRES not defined (via -e PGID_POSTGRES), defaulting to '104'" | ts '%Y-%m-%d %H:%M:%.S'
   export PGID_POSTGRES="104"
 fi
 
 # Set group users to specified group id (non unique)
 groupmod -o -g "${PGID_POSTGRES}" postgres &>/dev/null
+
+# Fix ownership of internal postgres config
+chown -R postgres:postgres /etc/postgresql/10 /var/lib/postgresql/10
 
 # Environment variables
 export $(grep -v '^#' /etc/default/unifi-protect | xargs)
