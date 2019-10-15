@@ -1,3 +1,9 @@
+# This image does not have a future
+
+It looks like release of the 1.12.5 package was *not* intentional... again. And future versions won't be public, the installations won't be upgradable and may eventually only work on Ubiquity hardware.
+
+![The .deb will be gone soon, and the upgrades around 1.14 wouldn't work on non-UI hardware anyway](https://i.imgur.com/dSlWvZY.png)
+
 # This image works w/ a macvlan network
 
 You'll need to run this image on your lan w/ a real IP, using Docker's [macvlan](https://docs.docker.com/network/macvlan/). It doesn't use dhcp and it doesn't watch for ip address conflicts, so be sure to account for that like the example below.
