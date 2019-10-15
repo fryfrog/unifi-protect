@@ -6,5 +6,11 @@ umask "${UMASK}"
 # Create the stat folder in /var/run/postgresql
 su -c "mkdir -p /var/run/postgresql/10-main.pg_stat_tmp" postgres
 
+# If the postgresql config folder is *empty*, create it
+if ! [[ "$(ls -A /etc/postgresql/10/main )" ]]; then
+  echo "The postgresql config folder is empty, populating..."
+  pg_createcluster 10 main
+fi
+
 # Run postgresql
 exec s6-setuidgid postgres /usr/lib/postgresql/10/bin/postgres --config_file="/etc/postgresql/10/main/postgresql.conf" -D /var/lib/postgresql/10/main -s
