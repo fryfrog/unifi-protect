@@ -27,18 +27,8 @@ docker run \
         -e PGID=999 \
         -e PUID_POSTGRES=102 \
         -e PGID_POSTGRES=104 \
-        -e VERSION=<file|url> \
         fryfrog/unifi-protect
 ```
-
-The `VERSION=` variable *requires* a `.deb` via `file:///srv/unifi-protect/package.deb` (available *inside* the container) or a url like `http://domain.com/package.deb`.
-
-Example:
-```
-        -e VERSION="file:///srv/unifi-protect/unifi-protect.jessie~stretch~xenial~bionic_amd64.v1.10.0-beta.7.deb"
-```
-
-The needed `.deb` file is *not* included, until Ubiquity clarifies its opinion of Docker images using it.
 
 #  tmpfs mount error
 

@@ -1,23 +1,6 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-case "${VERSION}" in
-  none)
-    echo -e '\e[31m'"No .deb provided for installation, VERSION= is required."'\e[0m'
-    exit 1
-    ;;
-
-  *)
-    url="${VERSION}"
-    ;;
-esac
-
-apt install -y postgresql && tempfile="$(mktemp).deb" && curl -fsSL -o "${tempfile}" "${url}" && apt install -y "${tempfile}" && INSTALL_OK="yes"
-if [[ "${INSTALL_OK}" != "yes" ]]; then
-  echo -e '\e[31m'"Installation of \"${url}\" failed!"'\e[0m'
-  exit 1
-fi
-
 # Set the UID/PID for unifi-protect user, fix shell.
 usermod -o -u "${PUID}" unifi-protect
 usermod --shell /bin/bash unifi-protect

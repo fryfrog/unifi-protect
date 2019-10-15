@@ -9,10 +9,15 @@ s6-svwait -t 60000 -u /var/run/s6/services/postgres
 # Environment variables
 export $(grep -v '^#' /etc/default/unifi-protect | xargs)
 
+NODE_ENV="production"
+UFP_SOCKETS_DIR=/var/run/unifi-protect
 UFP_BACKUPS_DIR=/etc/unifi-protect/backups
+UFP_BACKUPS_DIR_HD=/srv/unifi-protect/backups
 UFP_DATADIR=/srv/unifi-protect
 UFP_TMPFS_DIR=/srv/unifi-protect/temp
+UFP_CONFIG=/usr/share/unifi-protect/app/config/config.json
 UFP_TMPFS_SIZE=256m
+
 MALLOC_ARENA_MAX=1
 MALLOC_MMAP_THRESHOLD_=8192
 MALLOC_TRIM_THRESHOLD_=1

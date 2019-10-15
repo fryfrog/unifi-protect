@@ -5,6 +5,7 @@ ARG DEBIAN_FRONTEND="noninteractive"
 ARG ARCH_S6="amd64"
 
 # Set correct environment variables
+ENV version 1.12.5
 ENV APP_DIR="/srv/unifi-protect" CONFIG_DIR="/config" PUID="999" PGID="999" PUID_POSTGRES="102" PGID_POSTGRES="104" UMASK="002" VERSION="none"
 ENV LANG="en_US.UTF-8" LANGUAGE="en_US:en" LC_ALL="en_US.UTF-8"
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS 2
@@ -33,7 +34,10 @@ RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
     nodejs \
     psmisc \
     sudo \
-    systemd
+    systemd \
+    wget && \
+    wget --quiet https://apt.ubnt.com/pool/beta/u/unifi-protect/unifi-protect.jessie~stretch~xenial~bionic_amd64.v${version}.deb && \
+    apt install -y ./unifi-protect.jessie~stretch~xenial~bionic_amd64.v${version}.deb
 
 # Add needed patches and scripts
 COPY root/ /

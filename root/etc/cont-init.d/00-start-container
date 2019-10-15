@@ -12,7 +12,6 @@ PGID            | ${PGID}
 PUID_POSTGRES   | ${PUID_POSTGRES}
 PGID_POSTGRES   | ${PGID_POSTGRES}
 UMASK           | ${UMASK}
-VERSION         | ${VERSION}
 TZ              | ${TZ}
 ----------------------------------------------------------------------
 "
