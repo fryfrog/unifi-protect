@@ -58,3 +58,8 @@ mount: cannot mount tmpfs read-only
 ```
 
 If you get this tmpfs mount error, add `--security-opt apparmor:unconfined \` to your list of run options. This error has been seen on Ubuntu, but may occur on other platforms as well.
+
+# Alternative Unifi Protect Images
+
+* iamjamestl's [iamjamestl/unifi-protect](https://hub.docker.com/r/iamjamestl/unifi-protect) on Docker Hub, [iamjamestl/docker-unifi-protect](https://github.com/iamjamestl/docker-unifi-protect) on [github](
+).
