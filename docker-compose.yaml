@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+  unifi-protect:
+    image: unifi-protect
+    volumes:
+      - /mnt/ssd/unifi-protect/data:/srv/unifi-protect
+      - /mnt/ssd/unifi-protect/db:/var/lib/postgresql/10/main
+      - /mnt/ssd/unifi-protect/db-config:/etc/postgresql/10/main
+    ports:
+      - 7080:7080
+      - 7442:7442
+      - 7443:7443
+      - 7444:7444
+      - 7447:7447
+      - 7550:7550
+    cap_add:
+      - SYS_ADMIN
+      - DAC_READ_SEARCH
+    environment:
+      TZ: America/Los_Angeles
+      PUID: 999
+      PGID: 999
+      PUID_POSTGRES: 102
+      PGID_POSTGRES: 104
+    networks:
+      - ipv
+
+networks:
+  ipv:
+    driver: ipvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
+          ip_range: 172.20.1.1/32

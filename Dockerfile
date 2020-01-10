@@ -17,12 +17,14 @@ EXPOSE 7080/tcp 7443/tcp 7444/tcp 7447/tcp 7550/tcp 7442/tcp
 VOLUME ["/srv/unifi-protect"]
 
 # Setup the S6 overlay and update/install packages
-ADD https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-amd64.tar.gz /tmp/
-RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
+ADD https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-aarch64.tar.gz /tmp/
+RUN tar xzf /tmp/s6-overlay-aarch64.tar.gz -C / && \
   apt-get update && \
-  apt-get install -y apt-utils locales && \
+  apt-get install -y apt-utils locales gnupg2 software-properties-common && \
   locale-gen en_US.UTF-8 && \
   apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 97B46B8582C6571E && \
+  apt-add-repository https://apt.ubnt.com && \
   apt-get install -y  \
     curl \
     dbus \
@@ -35,9 +37,8 @@ RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
     psmisc \
     sudo \
     systemd \
-    wget && \
-    wget --quiet https://apt.ubnt.com/pool/beta/u/unifi-protect/unifi-protect.jessie~stretch~xenial~bionic_amd64.v${version}.deb && \
-    apt install -y ./unifi-protect.jessie~stretch~xenial~bionic_amd64.v${version}.deb
+    wget \
+    unifi-protect
 
 # Add needed patches and scripts
 COPY root/ /
